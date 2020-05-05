@@ -3,6 +3,7 @@ namespace $ {
 	const lines = [] as string[]
 
 	const colors = {
+		'' : $node.colorette.gray,
 		begin : $node.colorette.blue,
 		done : $node.colorette.green,
 		fail : $node.colorette.red,
@@ -42,7 +43,7 @@ namespace $ {
 		let str =  values.join( ' ' )
 
 		if( process.stdout.isTTY ) {
-			const color = colors[ input.sub[0].type ] || colors.event
+			const color = colors[ input.sub[0].type ] || colors['']
 			str = color( str )
 		}
 		
