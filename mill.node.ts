@@ -4,11 +4,12 @@ namespace $ {
 
 	const colors = {
 		'' : $node.colorette.gray,
-		begin : $node.colorette.blue,
+		come : $node.colorette.blue,
 		done : $node.colorette.green,
 		fail : $node.colorette.red,
 		warn : $node.colorette.yellow,
-		event : $node.colorette.magenta,
+		rise : $node.colorette.magenta,
+		area : $node.colorette.cyan,
 	}
 
 	const stat = new Map< string , number >()
