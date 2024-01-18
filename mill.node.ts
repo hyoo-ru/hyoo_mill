@@ -27,7 +27,13 @@ namespace $ {
 		lines.length = 0
 
 		const values = input.select( null, null ).kids.map( field => {
-			let json = $$.$mol_tree2_to_json( field.kids[0] )
+			
+			try {
+				var json = $$.$mol_tree2_to_json( field.kids[0] )
+			} catch( error: any ) {
+				json = $$.$mol_tree2_to_string( field.kids[0] )
+			} 
+			
 			let str = ( typeof json === 'string' ) ? json : JSON.stringify( json )
 
 			let width = stat.get( field.type ) ?? 0
