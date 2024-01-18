@@ -1,6 +1,6 @@
 {
 	"name": "hyoo_mill",
 	"bin": {
-		"hyoo_mill": "./hyoo/mill/-/node.js"
+		"hyoo_mill": "./node.js"
 	}
 }

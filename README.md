@@ -1,6 +1,21 @@
 # Mill
 
-CLI for Tree stream processing
+CLI for Tree stream processing.
+
+## Usage
+
+```sh
+npm install -g hyoo_mill
+some command | hyoo_mill
+```
+
+or
+
+```sh
+some comand | npm exec hyoo_mill
+```
+
+## Examples
 
 Example of input stream:
 
