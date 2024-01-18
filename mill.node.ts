@@ -38,7 +38,7 @@ namespace $ {
 			try {
 				var json = $$.$mol_tree2_to_json( field.kids[0] )
 			} catch( error: any ) {
-				json = $$.$mol_tree2_to_string( field.kids[0] )
+				json = $$.$mol_tree2_to_string( field )
 			} 
 			
 			let str = ( typeof json === 'string' ) ? json : JSON.stringify( json )
