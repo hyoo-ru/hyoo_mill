@@ -1,0 +1,25 @@
+name: hyoo_mill
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - master
+  pull_request:
+  schedule:
+    - cron: "0 7 * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: hyoo-ru/mam_build@master2
+      with:
+        package: hyoo/mill
+    - uses: JS-DevTools/npm-publish@v1
+      if: ${{ github.ref == 'refs/heads/master' }}
+      with:
+        token: ${{ secrets.NPM_AUTH_TOKEN }}
+        package: ./hyoo/mill/-/package.json

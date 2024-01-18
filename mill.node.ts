@@ -1,15 +1,19 @@
 namespace $ {
+	
+	if( process.argv[2] !== 'table' ) {
+		console.error( 'Only `table` mode is supported now' )
+	}
 
 	const lines = [] as string[]
 
 	const colors = {
-		'' : $node.colorette.gray,
-		come : $node.colorette.blue,
-		done : $node.colorette.green,
-		fail : $node.colorette.red,
-		warn : $node.colorette.yellow,
-		rise : $node.colorette.magenta,
-		area : $node.colorette.cyan,
+		''  : $mol_term_color.gray,
+		come: $mol_term_color.blue,
+		done: $mol_term_color.green,
+		fail: $mol_term_color.red,
+		warn: $mol_term_color.yellow,
+		rise: $mol_term_color.magenta,
+		area: $mol_term_color.cyan,
 	}
 
 	const stat = new Map< string , number >()
@@ -18,12 +22,11 @@ namespace $ {
 
 		if( lines.length === 0 ) return
 		
-		const input = $mol_tree.fromString( lines.join('') , `stdin` )
+		const input = $$.$mol_tree2_from_string( lines.join('') , `stdin` )
 		lines.length = 0
 
-		const values = input.select( '' , '' ).sub.map( field => {
-			
-			let json = field.sub[0].toJSON()
+		const values = input.select( null, null ).kids.map( field => {
+			let json = $$.$mol_tree2_to_json( field.kids[0] )
 			let str = ( typeof json === 'string' ) ? json : JSON.stringify( json )
 
 			let width = stat.get( field.type ) ?? 0
@@ -41,19 +44,21 @@ namespace $ {
 
 		} )
 
-		let str =  values.join( ' ' )
-
-		if( process.stdout.isTTY ) {
-			const color = colors[ input.sub[0].type ] || colors['']
-			str = color( str )
-		}
+		const color = colors[ input.kids[0].type as keyof typeof colors ] || colors[ '' ]
 		
-		console.log( str )
+		console.log( color( values.join( ' ' ) ) )
 
 	}
-
-	process.stdin.pipe( $node.split() )
+	
+	process.stdin
+	.pipe( $node.split() )
+	.on( 'end', ()=> console.log('!end') )
+	.on( 'close', ()=> console.log('!close') )
 	.on( 'data' , ( line : string )=> {
+		if( line[0] !== '\t' ) emit()
+		if( line ) lines.push( line + '\n' )
+	} )
+	.on( 'error' , ( line : string )=> {
 		if( line[0] !== '\t' ) emit()
 		if( line ) lines.push( line + '\n' )
 	} )
