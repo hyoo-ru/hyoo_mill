@@ -6,13 +6,13 @@ CLI for Tree stream processing.
 
 ```sh
 npm install -g hyoo_mill
-some command | hyoo_mill
+some command | hyoo_mill table
 ```
 
 or
 
 ```sh
-some comand | npm exec hyoo_mill
+some comand | npm exec hyoo_mill table
 ```
 
 ## Examples
