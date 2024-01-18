@@ -53,8 +53,6 @@ namespace $ {
 	
 	process.stdin
 	.pipe( $node.split() )
-	.on( 'end', ()=> console.log('!end') )
-	.on( 'close', ()=> console.log('!close') )
 	.on( 'data' , ( line : string )=> {
 		if( line[0] !== '\t' ) emit()
 		if( line ) lines.push( line + '\n' )
