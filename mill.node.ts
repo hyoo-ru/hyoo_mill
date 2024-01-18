@@ -23,8 +23,15 @@ namespace $ {
 
 		if( lines.length === 0 ) return
 		
-		const input = $$.$mol_tree2_from_string( lines.join('') , `stdin` )
+		const text = lines.join('')
 		lines.length = 0
+		
+		try {
+			var input = $$.$mol_tree2_from_string( text , `stdin` )
+		} catch( error ) {
+			console.log( $mol_term_color.gray( text ) )
+			return
+		}
 
 		const values = input.select( null, null ).kids.map( field => {
 			
