@@ -2,7 +2,7 @@ namespace $ {
 	
 	if( process.argv[2] !== 'table' ) {
 		console.error( 'Only `table` mode is supported now' )
-		process.exit(1)
+		process.exit(0)
 	}
 
 	const lines = [] as string[]
